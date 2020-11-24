@@ -1,7 +1,68 @@
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
 .App {
-  text-align: center;
+  text-align: Left;
+  border-radius: 1;
+  font-weight: 100;
+  font-size: x-small;
+  padding:10%;
+  background-color: aqua;
+ 
+  
+}
+#tab {
+
+  height: 0px;
+  width: 700px;
+  
+}
+.heading{
+  font-size: xx-large;
+}
+.header{
+  background-color: rgb(6, 226, 255);
+  width: 90%;
+  border-radius: 10px;
+  border:5px solid rgb(0, 174, 255);
 }
 
+.Information{
+  background-color: rgb(6, 226, 255);
+  width: 90%;
+  font-size: xx-small;
+  border-radius: 10px;
+  border:5px solid rgb(0, 174, 255);
+}
+.Education{
+  background-color: rgb(6, 226, 255);
+  width: 90%;
+  font-size: xx-small;
+  border-radius: 10px;
+  border:5px solid rgb(0, 174, 255);
+}
+.Company{
+  background-color: rgb(6, 226, 255);
+  width: 90%;
+  font-size: xx-small;
+  border-radius: 10px;
+  border:5px solid rgb(0, 174, 255);
+}
+.Hobbies{
+  background-color: rgb(6, 226, 255);
+  width: 90%;
+  font-size: xx-small;
+  border-radius: 10px;
+  border:5px solid rgb(0, 174, 255);
+}
+/* 
 .App-logo {
   height: 40vmin;
   pointer-events: none;
@@ -35,4 +96,4 @@
   to {
     transform: rotate(360deg);
   }
-}
+} */
