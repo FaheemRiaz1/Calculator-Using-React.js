@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import "./styles.css";
+import "./App.css";
 
 class App extends React.Component {
   //HERE I AM DECLARING A CONSTRUCTOR
