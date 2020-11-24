@@ -1,93 +1,243 @@
-import React from 'react';
+import React, { Component } from "react";
+import "./styles.css";
 
-import ReactDOM from 'react-dom';
-import logo from './logo.svg';
-import './App.css';
+class App extends React.Component {
+  //HERE I AM DECLARING A CONSTRUCTOR
+  constructor() {
+    super();
+    //HERE I AM DECLARING AN OBJECT WHICH HAS solution and array history
+    this.state = {
+      solution: "",
+      history: []
+    };
+  }
+  //HERE I AM ADDING EVENT LISTNER TO ALL BUTTONS
+  onClick = (button) => {
+    if (button === "CE") {
+      this.backspace();
+    } //NOW IF I CLICK CE BUTTON IT WILL DELETE VERY LAST DIGIT NUMBER
+    else if (button === "C") {
+      this.reset();
+    } //NOW IF I CLICK C BUTTON IT WILL RESET EVERYTHING
+    else if (button === "=") {
+      this.calculate();
+    } //NOW IF I CLICK = BUTTON THE RESULT WILL BE DISPLAYED
+    else {
+      this.setState({
+        solution: this.state.solution + button
+      });
+    } //THIS IS EVENT LISTNER FOR EVERYOTHER BUTTON e.g 1, 2, 3, 4, 5,... etc
+  };
 
-function Header1(props) {
-  return <h1>  {props.name}</h1>;
-}
-function Information(props) {
-  return <h1>Age:  {props.age} <br></br>
-  Address: {props.address}<br></br>
-  Phone Number: {props.phoneNumber}</h1>;
-}
-function Education(props){
-return <h1> {props.Institute} <br></br>
- Degree: {props.degree} <br></br>
- Start Date: {props.StartDate} <br></br>
- End Date: {props.EndDate} <br></br>
- Description: {props.description}</h1>
-}
-function Experience(props){
-return <h1> {props.company}<br></br>
-Start Date: {props.StartDate1} <br></br>
- End Date: {props.EndDate1} <br></br>
-</h1>
+  //THIS ARROW FUNCTION WILL BE INVOLVE IN CALCULATING CORRECT RESULTS
+  calculate = () => {
+    var vr = "";
+    //IF WE ENCOUNTER -+ DURING CALCULATION IT WILL AUTOMATICALLY CONVERT IT TO -
+    if (this.state.solution.includes("-+")) {
+      vr = this.state.solution.replace("-+", "-");
+    } //IF WE ENCOUNTER -- DURING CALCULATION IT WILL AUTOMATICALLY CONVERT IT TO +
+    else if (this.state.solution.includes("--")) {
+      vr = this.state.solution.replace("--", "+");
+    } else if (this.state.solution.includes("-*")) {
+      vr = this.state.solution.replace("-*", "*");
+    } else if (this.state.solution.includes("-/")) {
+      vr = this.state.solution.replace("-/", "/");
+    } else if (this.state.solution.includes("+/")) {
+      vr = this.state.solution.replace("+/", "/");
+    } else if (this.state.solution.includes("+*")) {
+      vr = this.state.solution.replace("+*", "*");
+    } else if (this.state.solution.includes("+-")) {
+      vr = this.state.solution.replace("+-", "-");
+    } else if (this.state.solution.includes("*/")) {
+      vr = this.state.solution.replace("*/", "/");
+    } else if (this.state.solution.includes("/-")) {
+      vr = this.state.solution.replace("/-", "-");
+    } else if (this.state.solution.includes("*-")) {
+      vr = this.state.solution.replace("*-", "-");
+    } else if (this.state.solution.includes("/+")) {
+      vr = this.state.solution.replace("/+", "+");
+    }
+    //ELSE IT WILL CALCULATE CORRECTLY
+    else {
+      vr = this.state.solution;
+    }
 
-}
-function Skills(props){
-  return <h1> {props.hobbies}</h1>
-}
+    // THIS TRY CATHC IS FOR THE ANY OTHER UNNECESSARY BUTTON CLICK
+    try {
+      this.setState({
+        solution: eval(vr)
+      });
+      this.state.history.push(eval(vr) + " | ");
+    } catch (error) {
+      this.setState({
+        solution: "Syntax Error"
+      });
+    }
+  };
+  //THIS WILL SET THE STATE OF THE INPUT TEXT TO EMPTY STRING
+  reset = () => {
+    this.setState({
+      solution: ""
+    });
+  };
+  //THIS IS DELETE THE VERY LAST DIGIT, OPERATION, or DECIMAL POINT
+  backspace = () => {
+    this.setState({
+      solution: this.state.solution.slice(0, -1)
+    });
+  };
+  //THIS IS FOR TRACKING HISTORY
+  historyfunc = (solution) => {
+    this.state.history.push(this.state.solution);
+  };
 
+  render() {
+    return (
+      //THE FOLLOWING CODE INCLUDES ALL HTML CODE THAT IS FRONT END OF CALCULATOR
+      <div>
+        <div class="row">
+          <h1>Calculator</h1>
+        </div>
 
+        <div className="cbody">
+          <p class="solution">{this.state.solution}</p>
+          <p class="solution">{this.state.history}</p>
 
-function App() {
-  return (
-    <div class="App">
-      <div class="header">
+          <button
+            name="%"
+            onClick={(clikcHandel) => this.onClick(clikcHandel.target.name)}
+          >
+            %
+          </button>
+          <button
+            name="CE"
+            onClick={(clikcHandel) => this.onClick(clikcHandel.target.name)}
+          >
+            CE
+          </button>
+          <button
+            class="btn1"
+            name="C"
+            onClick={(e) => this.onClick(e.target.name)}
+          >
+            C
+          </button>
+          <br />
 
-       <table>
-       <tr id="">
-            <td id="tab">
-             <Header1  name="Faheem Riaz" />
+          <button
+            name="1"
+            onClick={(clikcHandel) => this.onClick(clikcHandel.target.name)}
+          >
+            1
+          </button>
+          <button
+            name="2"
+            onClick={(clikcHandel) => this.onClick(clikcHandel.target.name)}
+          >
+            2
+          </button>
+          <button
+            name="3"
+            onClick={(clikcHandel) => this.onClick(clikcHandel.target.name)}
+          >
+            3
+          </button>
+          <button
+            class="btn2"
+            name="+"
+            onClick={(clikcHandel) => this.onClick(clikcHandel.target.name)}
+          >
+            +
+          </button>
+          <br />
 
-            </td>
-            <td >  <img  class ="photo" src="https://bmc.edu.pk/wp-content/uploads/2019/03/doctor-red-1.png" />
-            </td>
-          </tr>
-  
+          <button
+            name="4"
+            onClick={(clikcHandel) => this.onClick(clikcHandel.target.name)}
+          >
+            4
+          </button>
+          <button
+            name="5"
+            onClick={(clikcHandel) => this.onClick(clikcHandel.target.name)}
+          >
+            5
+          </button>
+          <button
+            name="6"
+            onClick={(clikcHandel) => this.onClick(clikcHandel.target.name)}
+          >
+            6
+          </button>
+          <button
+            class="btn2"
+            name="-"
+            onClick={(clikcHandel) => this.onClick(clikcHandel.target.name)}
+          >
+            -
+          </button>
+          <br />
 
+          <button
+            name="7"
+            onClick={(clikcHandel) => this.onClick(clikcHandel.target.name)}
+          >
+            7
+          </button>
+          <button
+            name="8"
+            onClick={(clikcHandel) => this.onClick(clikcHandel.target.name)}
+          >
+            8
+          </button>
+          <button
+            name="9"
+            onClick={(clikcHandel) => this.onClick(clikcHandel.target.name)}
+          >
+            9
+          </button>
+          <button
+            class="btn2"
+            name="*"
+            onClick={(clikcHandel) => this.onClick(clikcHandel.target.name)}
+          >
+            x
+          </button>
+          <br />
 
-       </table>
-
-       
+          <button
+            class="btn2"
+            name="."
+            onClick={(clikcHandel) => this.onClick(clikcHandel.target.name)}
+          >
+            .
+          </button>
+          <button
+            class="btn2"
+            name="0"
+            onClick={(clikcHandel) => this.onClick(clikcHandel.target.name)}
+          >
+            0
+          </button>
+          <button
+            class="btn2"
+            name="="
+            onClick={(clikcHandel) => this.onClick(clikcHandel.target.name)}
+          >
+            =
+          </button>
+          <button
+            class="btn2"
+            name="/"
+            onClick={(clikcHandel) => this.onClick(clikcHandel.target.name)}
+          >
+            ÷
+          </button>
+          <br />
+        </div>
       </div>
-
-      
-      <div class="Information">
-     
-      <h1 class="heading">Information:</h1>
-      <Information  age="20" address="house" phoneNumber="034567790"/>
-      
-      </div>
-      <div class="Education">
-
-      <h1 class="heading">Education:</h1>
-      <Education Institue="IMCB"degree="FSC" StartDate="10-10-2020"
-      EndDate="10-10-2021" description="IMCB"/>
-     
-     <Education Institue="COMSATS"degree="BSCS" StartDate="10-10-2022"
-      EndDate="10-10-2026" description="COMSATS UNIVERSITY"/>
-
-      </div>
-      
-    <div class="Company">
-      <h1 class="heading">Experience:</h1>
-      <Experience company="TECH" StartDate1="10-10-2022"
-      EndDate1="10-10-2026" />
-    </div>
-    <div class="Hobbies">
-    <h1 class="heading">Hobbies:</h1>
-    <Skills hobbies="cricket"/>
-    <Skills hobbies="gaming"/>
-    <Skills hobbies="writing"/>
-    </div>
-    
-    </div>
-  );
+    );
+  }
 }
-
-ReactDOM.render(<App />, document.getElementById('root'));
 
 export default App;
